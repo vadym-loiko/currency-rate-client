@@ -1,0 +1,21 @@
+syntax="proto3";
+
+option java_multiple_files=true;
+
+package org.vloiko.currencyrate.rate;
+
+service RateService {
+  rpc getRate(RateRequest) returns (CurrencyRate);
+  rpc getRateList(RateRequest) returns (stream CurrencyRate);
+  rpc getAverageRate(stream RateRequest) returns (CurrencyRate);
+}
+
+message RateRequest {
+  string fromCurrency = 1;
+  string toCurrency = 2;
+  string rateDate = 3;
+}
+
+message CurrencyRate {
+  double rate = 1;
+}
